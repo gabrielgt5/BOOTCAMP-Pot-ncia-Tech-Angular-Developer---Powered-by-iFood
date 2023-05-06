@@ -1,6 +1,8 @@
-
-
 //Renderizando o HTML lista de Pokemons
+function convertPokemonToLi(pokemonTypes){
+    return pokemonTypes.map((typeSlot) => `<li class="type ${typeSlot.type.name}</li>`)
+}
+
 function convertPokemonToHtml(pokemon) {
     return`
         <li class="pokemon ${pokemon.type}">
@@ -8,7 +10,7 @@ function convertPokemonToHtml(pokemon) {
             <span class="name">${pokemon.name}</span>
             <div class="detail">
                 <ol class="types">
-                    ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
+                   ${convertPokemonToLi(pokemon.types).join(' ')}
                 </ol>
                 <img src="${pokemon.photo}"
                      alt="${pokemon.name}">
@@ -21,8 +23,7 @@ function convertPokemonToHtml(pokemon) {
 const pokemonOl = document.getElementById('pokemonList');
 
 //Listando items com a função  JavaScript Map
-const ol = pokeApi.getPokemons().then((pokemons = []) => {
+pokeApi.getPokemons().then((pokemons = []) => {
     pokemonOl.innerHTML += pokemons.map(convertPokemonToHtml).join('');
 })
 
-console.log(ol);
