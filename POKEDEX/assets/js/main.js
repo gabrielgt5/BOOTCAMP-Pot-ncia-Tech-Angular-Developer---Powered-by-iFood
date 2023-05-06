@@ -17,15 +17,12 @@ function convertPokemonToHtml(pokemon) {
     `
 }
 
+//Pegando Elemento HTML pelo id
 const pokemonOl = document.getElementById('pokemonList');
 
+//Listando items com a função  JavaScript Map
+const ol = pokeApi.getPokemons().then((pokemons = []) => {
+    pokemonOl.innerHTML += pokemons.map(convertPokemonToHtml).join('');
+})
 
-
-    poke.then((pokemonList) => {
-        for(i=0; i <pokemonList.lenght; i++){
-            const pokemon = pokemonList[i];
-            pokemonOl.innerHTML += convertPokemonToHtml(pokemon);
-            
-        }
-    })
-    .catch((error) => console.error(error))
+console.log(ol);
